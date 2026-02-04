@@ -27,10 +27,14 @@ fun PostListScreen(
             is PostUiState.Success -> {
                 Column {
                     LazyColumn {
-                        item {
+                        item(key = "header") {
                             PostsListHeader(uiState.posts.size)
                         }
-                        items(uiState.posts.size) { index ->
+                        items(
+                            uiState.posts.size,
+                            key = { index ->
+                                uiState.posts[index].id
+                            }, contentType = { "post_card_type" }) { index ->
                             val post = uiState.posts[index]
                             PostCard(post, onClick = {
                                 onNavigateToPostDetails(post.id)
