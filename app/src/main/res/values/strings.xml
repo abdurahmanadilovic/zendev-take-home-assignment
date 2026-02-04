@@ -3,4 +3,6 @@
     <string name="post_list">List of posts</string>
     <string name="showing_items_from_the_feed">Showing %1$d items from the feed</string>
     <string name="featured_posts">Featured Posts</string>
+    <string name="retry">Retry</string>
+    <string name="trending_posts">Trending Posts</string>
 </resources>

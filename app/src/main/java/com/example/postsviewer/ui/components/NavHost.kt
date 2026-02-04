@@ -40,7 +40,9 @@ fun MyAppNavHost(
 
         composable<PostDetailsRoute> { backStackEntry ->
             val route: PostDetailsRoute = backStackEntry.toRoute()
-            PostDetailsScreen(postId = route.id)
+            PostDetailsScreen(postId = route.id, onBackClick = {
+                navController.navigateUp()
+            })
         }
     }
 }

@@ -17,9 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PostsViewerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyAppNavHost(modifier = Modifier.padding(innerPadding))
-                }
+                MyAppNavHost()
             }
         }
     }
