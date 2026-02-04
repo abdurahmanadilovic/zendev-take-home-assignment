@@ -5,14 +5,18 @@ import com.example.postsviewer.data.PostRepository
 import com.example.postsviewer.data.PostRepositoryImpl
 import com.example.postsviewer.domain.GetFilteredPostsUseCase
 import com.example.postsviewer.presentation.PostViewModel
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
 val appModule = module {
     single {
         Retrofit.Builder()
             .baseUrl("https://jsonplaceholder.typicode.com/")
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(PostApi::class.java)
     }
