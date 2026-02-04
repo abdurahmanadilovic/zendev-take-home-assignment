@@ -5,4 +5,6 @@
     <string name="featured_posts">Featured Posts</string>
     <string name="retry">Retry</string>
     <string name="trending_posts">Trending Posts</string>
+    <string name="post_details">Post Details</string>
+    <string name="back">Back</string>
 </resources>

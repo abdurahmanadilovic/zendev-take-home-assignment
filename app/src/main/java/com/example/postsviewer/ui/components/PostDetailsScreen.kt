@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,70 +34,76 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PostDetailsScreen(
     postId: Int,
     onBackClick: () -> Unit,
     viewModel: PostDetailsViewModel = koinViewModel { parametersOf(postId) }
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    PostDetailsContent(
+        uiState = uiState,
+        onBackClick = onBackClick
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PostDetailsContent(
+    uiState: DetailsUiState,
+    onBackClick: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Post Details") },
+                title = { Text(stringResource(R.string.post_details)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             painter = painterResource(R.drawable.sharp_arrow_back_24),
-                            contentDescription = "Go back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                    titleContentColor = MaterialTheme.colorScheme.onSurface
-                )
+                }
             )
         }
     ) { paddingValues ->
         Box(
             modifier = Modifier
-                .padding(paddingValues)
                 .fillMaxSize()
+                .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            when (val uiState = state) {
+            when (uiState) {
                 is DetailsUiState.Loading -> {
                     CircularProgressIndicator(Modifier.align(Alignment.Center))
                 }
 
                 is DetailsUiState.Success -> {
-                    PostDetailContent(uiState.post)
+                    val post = uiState.post
+                    Column {
+                        Text(
+                            text = post.title,
+                            style = MaterialTheme.typography.headlineMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = post.body,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
                 }
 
                 is DetailsUiState.Error -> {
-                    Text(uiState.message, color = MaterialTheme.colorScheme.error)
+                    Text(
+                        text = uiState.message,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun PostDetailContent(post: Post) {
-    Column {
-        Text(
-            text = post.title,
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = post.body,
-            style = MaterialTheme.typography.bodyLarge,
-            lineHeight = 24.sp
-        )
     }
 }
