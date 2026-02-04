@@ -5,6 +5,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.postsviewer.data.Post
 import com.example.postsviewer.presentation.DetailsUiState
 import com.example.postsviewer.presentation.PostUiState
+import com.example.postsviewer.ui.screens.PostDetailsContent
+import com.example.postsviewer.ui.screens.PostListContent
 
 @Preview(showBackground = true)
 @Composable

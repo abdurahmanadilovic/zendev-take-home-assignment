@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.postsviewer.presentation.PostViewModel
+import com.example.postsviewer.ui.screens.PostDetailsScreen
+import com.example.postsviewer.ui.screens.PostListScreen
 import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
 
