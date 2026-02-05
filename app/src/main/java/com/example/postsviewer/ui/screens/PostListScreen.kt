@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.postsviewer.R
 import com.example.postsviewer.presentation.PostUiState
@@ -81,7 +82,7 @@ fun PostListContent(
                         modifier = Modifier.align(Alignment.Center),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(uiState.message, color = MaterialTheme.colorScheme.error)
+                        Text(modifier = Modifier.padding(8.dp), text = uiState.message, color = MaterialTheme.colorScheme.error)
                         Button(onClick = onRetry) { Text(stringResource(R.string.retry)) }
                     }
                 }

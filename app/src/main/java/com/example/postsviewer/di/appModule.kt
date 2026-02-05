@@ -7,13 +7,17 @@ import com.example.postsviewer.domain.GetPostsUseCase
 import com.example.postsviewer.domain.GetPostByIdUseCase
 import com.example.postsviewer.presentation.PostDetailsViewModel
 import com.example.postsviewer.presentation.PostViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.serialization.json.Json
+import okhttp3.Dispatcher
 import okhttp3.MediaType.Companion.toMediaType
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlin.coroutines.CoroutineContext
 
 val appModule = module {
     single {
@@ -26,7 +30,7 @@ val appModule = module {
 
     single<PostRepository> { PostRepositoryImpl(get()) }
 
-    factory { GetPostsUseCase(get()) }
+    single { GetPostsUseCase(Dispatchers.Default, get()) }
 
     factory { GetPostByIdUseCase(get()) }
 

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -40,7 +41,8 @@ fun PostDetailsScreen(
 
     PostDetailsContent(
         uiState = uiState,
-        onBackClick = onBackClick
+        onBackClick = onBackClick,
+        onRetry = { viewModel.retry() }
     )
 }
 
@@ -48,7 +50,8 @@ fun PostDetailsScreen(
 @Composable
 fun PostDetailsContent(
     uiState: DetailsUiState,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onRetry: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -93,11 +96,13 @@ fun PostDetailsContent(
                 }
 
                 is DetailsUiState.Error -> {
-                    Text(
-                        text = uiState.message,
-                        color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
+                    Column(
+                        modifier = Modifier.align(Alignment.Center),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(modifier = Modifier.padding(8.dp), text = uiState.message, color = MaterialTheme.colorScheme.error)
+                        Button(onClick = onRetry) { Text(stringResource(R.string.retry)) }
+                    }
                 }
             }
         }

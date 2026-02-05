@@ -21,6 +21,10 @@ class PostDetailsViewModel(
         loadPost()
     }
 
+    fun retry() {
+        loadPost()
+    }
+
     private fun loadPost() {
         viewModelScope.launch {
             getPostByIdUseCase(postId)

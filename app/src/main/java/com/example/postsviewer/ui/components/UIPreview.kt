@@ -25,6 +25,7 @@ fun PreviewPostDetailsContent() {
     val samplePost = Post(id = 1, title = "Compose screen", body = "Some content about compose and its features!", userId = 1)
     PostDetailsContent(
         uiState = DetailsUiState.Success(samplePost),
+        onRetry = {},
         onBackClick = {}
     )
 }
