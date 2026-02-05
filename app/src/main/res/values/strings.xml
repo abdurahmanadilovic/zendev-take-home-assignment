@@ -7,4 +7,5 @@
     <string name="trending_posts">Trending Posts</string>
     <string name="post_details">Post Details</string>
     <string name="back">Back</string>
+    <string name="generic_error">Failed loading resource</string>
 </resources>

@@ -82,7 +82,11 @@ fun PostListContent(
                         modifier = Modifier.align(Alignment.Center),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(modifier = Modifier.padding(8.dp), text = uiState.message, color = MaterialTheme.colorScheme.error)
+                        Text(
+                            modifier = Modifier.padding(8.dp),
+                            text = uiState.message.asString(),
+                            color = MaterialTheme.colorScheme.error
+                        )
                         Button(onClick = onRetry) { Text(stringResource(R.string.retry)) }
                     }
                 }
