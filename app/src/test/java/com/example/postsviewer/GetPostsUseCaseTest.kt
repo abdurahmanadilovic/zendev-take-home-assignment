@@ -1,7 +1,6 @@
 package com.example.postsviewer
 
 import com.example.postsviewer.data.Post
-import com.example.postsviewer.data.PostRepository
 import com.example.postsviewer.domain.GetPostsUseCase
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
