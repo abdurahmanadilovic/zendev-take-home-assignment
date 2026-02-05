@@ -3,7 +3,7 @@ package com.example.postsviewer.di
 import com.example.postsviewer.data.PostApi
 import com.example.postsviewer.data.PostRepository
 import com.example.postsviewer.data.PostRepositoryImpl
-import com.example.postsviewer.domain.GetFilteredPostsUseCase
+import com.example.postsviewer.domain.GetPostsUseCase
 import com.example.postsviewer.domain.GetPostByIdUseCase
 import com.example.postsviewer.presentation.PostDetailsViewModel
 import com.example.postsviewer.presentation.PostViewModel
@@ -18,7 +18,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 val appModule = module {
     single {
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl(PostApi.BACKEND_URL)
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(PostApi::class.java)
@@ -26,7 +26,7 @@ val appModule = module {
 
     single<PostRepository> { PostRepositoryImpl(get()) }
 
-    factory { GetFilteredPostsUseCase(get()) }
+    factory { GetPostsUseCase(get()) }
 
     factory { GetPostByIdUseCase(get()) }
 

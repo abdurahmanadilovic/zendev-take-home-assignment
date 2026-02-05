@@ -9,4 +9,8 @@ interface PostApi {
 
     @GET("posts/{id}")
     suspend fun getPostById(@Path("id") id: Int): Post
+
+    companion object {
+        const val BACKEND_URL = "https://jsonplaceholder.typicode.com/"
+    }
 }
